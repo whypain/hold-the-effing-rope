@@ -7,11 +7,14 @@ public class StaminaBarUI : MonoBehaviour
     public float maxStamina;
     public float currentStamina;
     public float staminaDrainRate;
+    public float currentStaminaDrain;
+    public PeopleControllers peopleControllers;
     public PointerController pointerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         bar.value = currentStamina/ maxStamina;
+        currentStaminaDrain = peopleControllers.topPeople*0.002f;
     }
 
     // Update is called once per frame
@@ -32,7 +35,7 @@ public class StaminaBarUI : MonoBehaviour
         {
             currentStamina = 101;
         }
-        currentStamina = currentStamina - staminaDrainRate;
+        currentStamina = currentStamina - currentStaminaDrain;
         bar.value = currentStamina / maxStamina;
     }
     public void ProcessResult()
@@ -40,25 +43,29 @@ public class StaminaBarUI : MonoBehaviour
         if (currentStamina >= 100)
         {
             currentStamina = 50;
-            if (staminaDrainRate > 0)
+            peopleControllers.topPeople += 1;
+            peopleControllers.bottomPeople -= 1;
+            if (currentStaminaDrain > 0)
             {
-                staminaDrainRate -= 0.002f;
-                if (pointerController.moveSpeed > 1000f)
+                currentStaminaDrain -= staminaDrainRate;
+                if (pointerController.moveSpeed > pointerController.baseSpeed)
                 {
-                    pointerController.moveSpeed -= 400f;
+                    pointerController.moveSpeed -= pointerController.speedChangeRate;
                 }
-                if (staminaDrainRate < 0)
+                if (currentStaminaDrain < 0)
                 {
-                    staminaDrainRate = 0;
+                    currentStaminaDrain = 0;
                 }
             }
             bar.value = currentStamina / maxStamina;
         }
         if (currentStamina <= 0)
         {
+            peopleControllers.bottomPeople += 1;
+            peopleControllers.topPeople -= 1;
             currentStamina = 50;
-            staminaDrainRate += 0.002f;
-            pointerController.moveSpeed += 400f;
+            currentStaminaDrain += staminaDrainRate;
+            pointerController.moveSpeed += pointerController.speedChangeRate;
             bar.value = currentStamina / maxStamina;
         }
     }

@@ -3,12 +3,14 @@ using UnityEngine.InputSystem;
 
 public class PointerController : MonoBehaviour
 {
-    public Transform pointA; // Reference to the starting point
-    public Transform pointB; // Reference to the ending point
-    public RectTransform safeZone; // Reference to the safe zone RectTransform
-    public float moveSpeed = 100f; // Speed of the pointer movement
+    public Transform pointA;
+    public Transform pointB;
+    public RectTransform safeZone;
+    public float moveSpeed;
+    public float baseSpeed;
+    public float speedChangeRate;
 
-    private float direction = 1f; // 1 for moving towards B, -1 for moving towards A
+    private float direction = 1f;
     private RectTransform pointerTransform;
     private Vector3 targetPosition;
     public StaminaBarUI staminaBarUI;
@@ -16,6 +18,7 @@ public class PointerController : MonoBehaviour
 
     void Start()
     {
+        baseSpeed = moveSpeed;
         pointerTransform = GetComponent<RectTransform>();
         targetPosition = pointB.position;
     }

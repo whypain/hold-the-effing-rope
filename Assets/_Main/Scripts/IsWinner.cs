@@ -4,11 +4,12 @@ public class IsWinner : MonoBehaviour
 {
     public GameObject win;
     public GameObject lose;
-    public StaminaBarUI staminaBarUI;
+    public PeopleControllers peopleControllers;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        win.SetActive(false);
+        lose.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,12 +19,12 @@ public class IsWinner : MonoBehaviour
     }
     public void CheckWinLose()
     {
-        if (staminaBarUI.staminaDrainRate == 0)
+        if (peopleControllers.topPeople == peopleControllers.maxPeople)
         {
             win.SetActive(true);
             lose.SetActive(false);
         }
-        else if (staminaBarUI.staminaDrainRate >= 0.02f)
+        else if (peopleControllers.bottomPeople == peopleControllers.maxPeople)
         {
             lose.SetActive(true);
             win.SetActive(false);
