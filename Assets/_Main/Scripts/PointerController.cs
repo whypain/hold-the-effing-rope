@@ -53,7 +53,7 @@ public class PointerController : MonoBehaviour
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
             Debug.Log("Success!");
-            randomX = Random.Range(pointA.position.x, pointB.position.x);
+            randomX = Random.Range(pointA.position.x+35, pointB.position.x-35);
             Vector2 newPositionX = safeZone.transform.position;
             newPositionX.x = randomX;
             safeZone.transform.position = newPositionX;

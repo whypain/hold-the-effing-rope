@@ -565,6 +565,7 @@ MonoBehaviour:
   lose: {fileID: 0}
   peopleControllers: {fileID: 0}
   staminaBarUI: {fileID: 0}
+  minigamesControllers: {fileID: 0}
 --- !u!1 &540049506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &824138348
 Transform:
   m_ObjectHideFlags: 0
@@ -1875,7 +1876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.8, y: 13.652359}
+  m_AnchoredPosition: {x: 59, y: 13.652359}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275063170
@@ -1965,6 +1966,7 @@ MonoBehaviour:
   safeZone: {fileID: 1026265018}
   pointerTransform: {fileID: 422009553}
   staminaBarUI: {fileID: 770447578}
+  staminaGainAmount: 1
 --- !u!1 &1456739902
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,8 +2143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MinigamesControllers
   miniG1: {fileID: 824138347}
   miniG2: {fileID: 1382228513}
+  LastStand: 1
+  LastStandMode: 0
+  spamSkillCheck: {fileID: 1382228515}
   staminaBarUI: {fileID: 770447578}
-  peopleControllers: {fileID: 0}
+  peopleControllers: {fileID: 404576663}
 --- !u!114 &1936184473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2159,6 +2164,7 @@ MonoBehaviour:
   lose: {fileID: 1198924464}
   peopleControllers: {fileID: 404576663}
   staminaBarUI: {fileID: 770447578}
+  minigamesControllers: {fileID: 1936184472}
 --- !u!1 &1941759188
 GameObject:
   m_ObjectHideFlags: 0

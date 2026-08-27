@@ -7,6 +7,7 @@ public class SpamSkillCheck : MonoBehaviour
     public RectTransform safeZone;    
     public RectTransform pointerTransform;
     public StaminaBarUI staminaBarUI;
+    public float staminaGainAmount;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,7 +29,7 @@ public class SpamSkillCheck : MonoBehaviour
         {
             Debug.Log("Success!"); 
             if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
-                staminaBarUI.currentStamina += 1f;
+                staminaBarUI.currentStamina += staminaGainAmount;
         }
     }
 }

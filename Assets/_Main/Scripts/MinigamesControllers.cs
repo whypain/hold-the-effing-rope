@@ -4,7 +4,9 @@ public class MinigamesControllers : MonoBehaviour
 {
     public GameObject miniG1;
     public GameObject miniG2;
-    private bool LastStand = true;
+    public bool LastStand = true;
+    public bool LastStandMode = false;
+    public SpamSkillCheck spamSkillCheck;
     public StaminaBarUI staminaBarUI;
     public PeopleControllers peopleControllers;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,17 +21,24 @@ public class MinigamesControllers : MonoBehaviour
         miniGame();
     }
     public void miniGame()
-    {
-        if (staminaBarUI.currentStamina >= 85)
-        {
-            miniG1.SetActive(false);
-            miniG2.SetActive(true);
-        }
-        else if (staminaBarUI.currentStamina <= 15 && peopleControllers.topPeople == 1 && LastStand == true)
+    {        
+        if (staminaBarUI.currentStamina <= 15 && peopleControllers.topPeople == 1 && LastStand == true)
         {
             miniG1.SetActive(false);
             miniG2.SetActive(true);
             LastStand = false;
+            LastStandMode = true;
+            spamSkillCheck.staminaGainAmount += 2;
+        }
+        if (staminaBarUI.currentStamina >= 85 || LastStandMode == true)
+        {
+            miniG1.SetActive(false);
+            miniG2.SetActive(true);
+            if (staminaBarUI.currentStamina >= 30 && LastStandMode == true)
+            {
+                LastStandMode = false;
+                spamSkillCheck.staminaGainAmount -= 2;
+            }
         }
         else
         {
