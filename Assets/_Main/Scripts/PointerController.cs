@@ -26,7 +26,7 @@ public class PointerController : MonoBehaviour
     void Update()
     {
         // Move the pointer towards the target position
-        pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, targetPosition, moveSpeed * Time.deltaTime);
+        pointerTransform.position = Vector3.Lerp(pointA.position, pointB.position, Mathf.PingPong(Time.time * moveSpeed, 1f));
 
         // Change direction if the pointer reaches one of the points
         if (Vector3.Distance(pointerTransform.position, pointA.position) < 0.1f)
