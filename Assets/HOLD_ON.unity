@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 25010541}
   - component: {fileID: 25010540}
+  - component: {fileID: 25010542}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -212,6 +213,21 @@ Transform:
   - {fileID: 1852269918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -11.209}
+--- !u!114 &25010542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25010539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20dc36f7c94ebbc4da82522932f78bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandShake
+  strength: {x: 0.01, y: 0.01, z: 0}
+  frequency: 10
+  _shakeOnStart: 1
 --- !u!1 &27824574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1208,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5382985589091306188, guid: 701dca8a1e101ac4ea94264bf1258e94, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1532031403}
   m_SourcePrefab: {fileID: 100100000, guid: 701dca8a1e101ac4ea94264bf1258e94, type: 3}
 --- !u!1 &431350194
 GameObject:
@@ -2384,6 +2403,26 @@ MonoBehaviour:
   win: {fileID: 947737167}
   lose: {fileID: 2111415814}
   peopleControllers: {fileID: 404576663}
+--- !u!1 &1532031400 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5382985589091306188, guid: 701dca8a1e101ac4ea94264bf1258e94, type: 3}
+  m_PrefabInstance: {fileID: 413121686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1532031403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532031400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee87cb41103982348b108c088e3c182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RopeShake
+  strength: {x: 0.0005, y: 0, z: 0}
+  frequency: 10
+  _shakeOnStart: 1
 --- !u!1 &1693178072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1799087390}
   - component: {fileID: 1799087389}
+  - component: {fileID: 1799087391}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -2732,6 +2772,21 @@ Transform:
   - {fileID: 237346786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -4.168}
+--- !u!114 &1799087391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799087388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20dc36f7c94ebbc4da82522932f78bc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HandShake
+  strength: {x: 0.01, y: 0.01, z: 0}
+  frequency: 10
+  _shakeOnStart: 1
 --- !u!1 &1814123894
 GameObject:
   m_ObjectHideFlags: 0
