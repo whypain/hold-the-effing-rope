@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class IsWinner : MonoBehaviour
 {
+    [SerializeField] private AudioClip winSound;
+    [SerializeField] private AudioClip loseSound;
+
     public GameObject win;
     public GameObject lose;
     public PeopleControllers peopleControllers;
@@ -23,11 +26,13 @@ public class IsWinner : MonoBehaviour
         {
             win.SetActive(true);
             lose.SetActive(false);
+            AudioSystem.PlaySFX(winSound);
         }
         else if (peopleControllers.bottomPeople == peopleControllers.maxPeople)
         {
             lose.SetActive(true);
             win.SetActive(false);
+            AudioSystem.PlaySFX(loseSound);
         }
     }
 }
