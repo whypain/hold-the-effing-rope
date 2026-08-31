@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class IsWinner : MonoBehaviour
 {
-    [SerializeField] private AudioClip winSound;
-    [SerializeField] private AudioClip loseSound;
-
     public GameObject win;
     public GameObject lose;
     public PeopleControllers peopleControllers;
+
+    public bool GameOver;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,19 +20,24 @@ public class IsWinner : MonoBehaviour
     {
         CheckWinLose();
     }
+
     public void CheckWinLose()
     {
+        if (GameOver) return;
+
         if (peopleControllers.topPeople == peopleControllers.maxPeople)
         {
             win.SetActive(true);
             lose.SetActive(false);
-            AudioSystem.PlaySFX(winSound);
+            AudioSystem.Instance?.Play(AudioType.Win);
+            GameOver = true;
         }
         else if (peopleControllers.bottomPeople == peopleControllers.maxPeople)
         {
             lose.SetActive(true);
             win.SetActive(false);
-            AudioSystem.PlaySFX(loseSound);
+            AudioSystem.Instance?.Play(AudioType.Lose);
+            GameOver = true;
         }
     }
 }

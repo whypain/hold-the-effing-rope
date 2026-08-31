@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class Replayable : MonoBehaviour
 {
@@ -10,17 +7,18 @@ public class Replayable : MonoBehaviour
     public PeopleControllers peopleControllers;
     public StaminaBarUI staminaBarUI;
     public MinigamesControllers minigamesControllers;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private IsWinner isWinner;
+
     void Start()
     {
-
+        AudioSystem.Instance?.Play(AudioType.BGM);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
     public void Replay()
     {
         win.SetActive(false);
@@ -30,5 +28,8 @@ public class Replayable : MonoBehaviour
         peopleControllers.bottomPeople = peopleControllers.maxPeople/2;
         staminaBarUI.bar.value = staminaBarUI.currentStamina / staminaBarUI.maxStamina;
         staminaBarUI.currentStaminaDrain = peopleControllers.topPeople * 0.002f;
+        isWinner.GameOver = false;
+
+        AudioSystem.Instance?.Play(AudioType.BGM);
     }
 }
