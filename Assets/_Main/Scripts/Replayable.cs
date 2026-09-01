@@ -29,6 +29,7 @@ public class Replayable : MonoBehaviour
         staminaBarUI.bar.value = staminaBarUI.currentStamina / staminaBarUI.maxStamina;
         staminaBarUI.currentStaminaDrain = peopleControllers.topPeople * 0.002f;
         isWinner.GameOver = false;
+        staminaBarUI.currentStamina = 50;
 
         AudioSystem.Instance?.Play(AudioType.BGM);
     }
