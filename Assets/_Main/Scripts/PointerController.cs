@@ -53,9 +53,9 @@ public class PointerController : MonoBehaviour
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
             Debug.Log("Success!");
-            randomX = Random.Range(pointA.position.x+35, pointB.position.x-35);
+            randomX = Random.Range(pointA.position.y+50, pointB.position.y-50);
             Vector2 newPositionX = safeZone.transform.position;
-            newPositionX.x = randomX;
+            newPositionX.y = randomX;
             safeZone.transform.position = newPositionX;
             if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
             staminaBarUI.currentStamina += 10f;

@@ -23,6 +23,7 @@ public class Replayable : MonoBehaviour
     {
         win.SetActive(false);
         lose.SetActive(false);
+        staminaBarUI.gameObject.SetActive(true);
         minigamesControllers.LastStand = true;
         peopleControllers.topPeople = peopleControllers.maxPeople/2;
         peopleControllers.bottomPeople = peopleControllers.maxPeople/2;

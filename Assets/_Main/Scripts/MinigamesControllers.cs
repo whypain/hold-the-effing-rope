@@ -45,5 +45,13 @@ public class MinigamesControllers : MonoBehaviour
             miniG1.SetActive(true);
             miniG2.SetActive(false);
         }
+
+
+        if (peopleControllers.topPeople <= 0)
+        {
+            miniG2.SetActive(false);
+            miniG1.SetActive(false);
+            staminaBarUI.gameObject.SetActive(false);
+        }
     }
 }
