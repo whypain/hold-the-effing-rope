@@ -66,9 +66,13 @@ public class StaminaBarUI : MonoBehaviour
             if (currentStaminaDrain > 0)
             {
                 currentStaminaDrain -= staminaDrainRate;
-                if (pointerController.moveSpeed > pointerController.baseSpeed)
+                if (pointerController.moveSpeed >= pointerController.maxSpeed)
                 {
-                    pointerController.moveSpeed -= pointerController.speedChangeRate;
+                    pointerController.moveSpeed = pointerController.maxSpeed;
+                }
+                else
+                {
+                    pointerController.moveSpeed += pointerController.speedChangeRate;
                 }
                 if (currentStaminaDrain < 0)
                 {
@@ -83,7 +87,14 @@ public class StaminaBarUI : MonoBehaviour
             peopleControllers.topPeople -= 1;
             currentStamina = 50;
             currentStaminaDrain += staminaDrainRate;
-            pointerController.moveSpeed += pointerController.speedChangeRate;
+            if (pointerController.moveSpeed >= pointerController.maxSpeed)
+            {
+                pointerController.moveSpeed = pointerController.maxSpeed;
+            }
+            else
+            {
+                pointerController.moveSpeed += pointerController.speedChangeRate;
+            }
             bar.value = currentStamina / maxStamina;
         }
     }

@@ -6,15 +6,18 @@ public class PointerController : MonoBehaviour
     public Transform pointA;
     public Transform pointB;
     public RectTransform safeZone;
+    public RectTransform GreatZone;
+    public RectTransform PerfectZone;
     public float moveSpeed;
     public float baseSpeed;
     public float speedChangeRate;
+    public float maxSpeed;
 
     private float direction = 1f;
     private RectTransform pointerTransform;
     private Vector3 targetPosition;
     public StaminaBarUI staminaBarUI;
-    float randomX;
+    float randomY;
 
     void Start()
     {
@@ -52,13 +55,28 @@ public class PointerController : MonoBehaviour
         // Check if the pointer is within the safe zone
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
-            Debug.Log("Success!");
-            randomX = Random.Range(pointA.position.y+50, pointB.position.y-50);
-            Vector2 newPositionX = safeZone.transform.position;
-            newPositionX.y = randomX;
-            safeZone.transform.position = newPositionX;
-            if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
-            staminaBarUI.currentStamina += 10f;
+            randomY = Random.Range(pointA.position.y-50, pointB.position.y+50);
+            Vector2 newPositionY = safeZone.transform.position;
+            newPositionY.y = randomY;
+            safeZone.transform.position = newPositionY;
+            if (RectTransformUtility.RectangleContainsScreenPoint(PerfectZone, pointerTransform.position, null))
+            {
+                Debug.Log("Perfect!");
+                if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
+                    staminaBarUI.currentStamina += 30f;
+            }
+            else if (RectTransformUtility.RectangleContainsScreenPoint(GreatZone, pointerTransform.position, null))
+            {
+                Debug.Log("Great!");
+                if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
+                    staminaBarUI.currentStamina += 20f;
+            }
+            else
+            {
+                Debug.Log("Success!");
+                if (staminaBarUI.currentStamina < staminaBarUI.maxStamina)
+                    staminaBarUI.currentStamina += 10f;
+            }
         }
         else
         {
