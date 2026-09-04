@@ -28,11 +28,11 @@ public class RopeShake : MonoBehaviour
     public void Shake()
     {
         ShakeSettings settings = new(strength, 1f, frequency, false);
+        Vector3 startPosition = lineRenderer.GetPosition(0);
 
         Sequence.Create()
             .Chain(Tween.ShakeCustom(lineRenderer, Vector3.zero, settings, (lr, v) =>
             {
-                Vector3 startPosition = lr.GetPosition(0);
                 lr.SetPosition(0, startPosition + v);
             }))
             .SetRemainingCycles(-1);
