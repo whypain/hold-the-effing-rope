@@ -15,6 +15,7 @@ public class StaminaBarUI : MonoBehaviour
 
     public Volume volume;
     public Vignette vignette;
+    [SerializeField] private float vignetteMaxIntensity = 0.6f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -54,7 +55,7 @@ public class StaminaBarUI : MonoBehaviour
         currentStamina = currentStamina - currentStaminaDrain * 10f;
         bar.value = currentStamina / maxStamina;
 
-        vignette.intensity.Override(Mathf.Clamp01(0.8f - bar.value));
+        vignette.intensity.Override(Mathf.Clamp01(vignetteMaxIntensity - bar.value));
     }
     public void ProcessResult()
     {
