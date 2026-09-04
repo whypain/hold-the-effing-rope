@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3016418664330534268}
   - component: {fileID: 5674051501076330294}
+  - component: {fileID: 530949524024274682}
   m_Layer: 0
   m_Name: RopeExample
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5795851, y: 0.5795851, z: 0.5795851}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +59,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 604fb3419e6a54640a6f1d973f893ec0, type: 2}
+  - {fileID: 2100000, guid: eaa70a8f0c8b239489aeb4e23bcd473f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,11 +80,11 @@ LineRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Positions:
-  - {x: 0, y: -3, z: 0}
-  - {x: 0, y: 3, z: 0}
+  - {x: 0.01, y: -5.19, z: 0}
+  - {x: -0.06, y: 0.39, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -91,14 +92,23 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.060165405
-        value: 0.29864693
+        time: 0.042485595
+        value: 0.66141796
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.46786606
+        value: 0.1346312
+        inSlope: -1.255734
+        outSlope: -1.255734
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.087300874
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -136,9 +146,24 @@ LineRenderer:
     numCapVertices: 3
     alignment: 0
     textureMode: 1
-    textureScale: {x: 0.65, y: 0.63}
+    textureScale: {x: 1, y: 0.75}
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &530949524024274682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382985589091306188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee87cb41103982348b108c088e3c182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RopeShake
+  strength: {x: 0.0005, y: 0, z: 0}
+  frequency: 10
+  _shakeOnStart: 1
