@@ -10,9 +10,11 @@ public class Replayable : MonoBehaviour
     public PeopleControllers peopleControllers;
     public StaminaBarUI staminaBarUI;
     public MinigamesControllers minigamesControllers;
+
     [SerializeField] private IsWinner isWinner;
+    [SerializeField] private float requiredHoldTime = 4f;
+
     private float holdTimer = 0f;
-    private float requiredHoldTime = 4f;
 
     void Start()
     {
@@ -24,7 +26,9 @@ public class Replayable : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.spaceKey.isPressed && isWinner.GameOver == true)
+        if (!isWinner.GameOver) return;
+
+        if (Keyboard.current.spaceKey.isPressed)
         {
             Debug.Log("Space key is being held down.");
             holdTimer += Time.deltaTime;
@@ -38,7 +42,9 @@ public class Replayable : MonoBehaviour
         }
         else
         {
-            holdTimer = 0f;
+            holdTimer = Mathf.Max(0, holdTimer - Time.deltaTime);
+            currentbar = holdTimer;
+            Replaybar.value = currentbar / maxbar;
         }
     }
 
