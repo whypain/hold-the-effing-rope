@@ -62,7 +62,7 @@ public class GlobalState : MonoBehaviour
     public void Initialize()
     {
         stamina = new StaminaController(maxStamina, startingStamina);
-        staminaDrain = topPeople * staminaDrainMult;
+        staminaDrain = topPeople;
 
         // Store the initial values for reset
         m_topPeople = topPeople;
