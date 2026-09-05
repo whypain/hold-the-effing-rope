@@ -13,18 +13,20 @@ public class HomeState : GameState
         startScreen.SetActive(true);
         staminaBarUI.SetActive(false);
     }
+
     public override void Exit()
     {
         startScreen.SetActive(false); 
         remaining.SetActive(true);
         staminaBarUI.SetActive(true);
     }
+
     public override void Tick(float deltaTime, GameStateManager manager)
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             manager.TransitionToState(EGameState.SkillCheck); 
-            manager.GS.currentStaminaDrain = manager.GS.startingDrain;
+            manager.GS.Initialize();
         }
     }
 }

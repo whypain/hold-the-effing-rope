@@ -56,9 +56,9 @@ public class GameOverState : GameState
             replayBar.value = holdTimer / holdToReplaySeconds;
             if (holdTimer >= holdToReplaySeconds)
             {
-                ResetGlobalState();
                 holdTimer = 0f;
 
+                manager.GS.Reset();
                 manager.TransitionToState(EGameState.Home);
             }
         }
@@ -67,23 +67,5 @@ public class GameOverState : GameState
             holdTimer = Mathf.Max(0, holdTimer - deltaTime);
             replayBar.value = holdTimer / holdToReplaySeconds;
         }
-    }
-
-    private void ResetGlobalState()
-    {
-        var gs = GlobalState.Instance;
-        if (gs == null) return;
-
-        int maxPeople = gs.maxPeople;
-        int topPeople = gs.topPeople;
-
-        gs.lastStand = true;
-        gs.topPeople = maxPeople/2;
-        gs.bottomPeople = maxPeople/2;
-        gs.currentStaminaDrain = topPeople * 0.002f;
-        gs.skillCheckSpeed = gs.skillCheckBaseSpeed;
-        gs.stamina.Set(50);
-
-        AudioSystem.Instance?.Play(AudioType.BGM);
     }
 }

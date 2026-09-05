@@ -1,12 +1,9 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SpamState : GameState
 {
     [SerializeField] private GameObject minigame;
-    [SerializeField] private RectTransform safeZone;    
-    [SerializeField] private RectTransform pointerTransform;
 
     public override void Enter() { minigame.SetActive(true); }
     public override void Exit() { minigame.SetActive(false); }
@@ -15,22 +12,23 @@ public class SpamState : GameState
     {
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            CheckSuccess();
+            Debug.Log("Spam");
+            float refillAmount = GlobalState.Instance.lastStand == LastStand.Activated
+                ? GlobalState.Instance.lastStandStaminaGainAmount
+                : GlobalState.Instance.spamStaminaGainAmount;
+
+            GlobalState.Instance.stamina.Refill(refillAmount);
         }
 
-        if (manager.GS.stamina.currentStamina < 85)
+        if (manager.GS.stamina.currentStamina < 85 && manager.GS.lastStand != LastStand.Activated)
         {
             manager.TransitionToState(EGameState.SkillCheck);
         }
-    }
 
-    void CheckSuccess()
-    {
-        // Check if the pointer is within the safe zone
-        if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
+        if (manager.GS.stamina.currentStamina >= 30 && manager.GS.lastStand == LastStand.Activated)
         {
-            Debug.Log("Success!"); 
-            GlobalState.Instance.stamina.Refill(GlobalState.Instance.spamStaminaGainAmount);
+            manager.GS.lastStand = LastStand.Used;
+            manager.TransitionToState(EGameState.SkillCheck);
         }
     }
 }

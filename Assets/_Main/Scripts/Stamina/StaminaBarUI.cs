@@ -23,9 +23,7 @@ public class StaminaBarUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gs.stamina = new StaminaController(gs.maxStamina, gs.startingStamina);
         bar.value = currentStamina / gs.maxStamina;
-        gs.currentStaminaDrain = gs.topPeople * 0.002f;
 
         if (volume != null && volume.profile != null)
         {
@@ -55,7 +53,7 @@ public class StaminaBarUI : MonoBehaviour
             currentStamina = 101;
         }
 
-        currentStamina -= gs.currentStaminaDrain * 10f;
+        currentStamina -= gs.staminaDrain;
         bar.value = currentStamina / gs.maxStamina;
 
         vignette.intensity.Override(Mathf.Clamp01(vignetteMaxIntensity - bar.value));

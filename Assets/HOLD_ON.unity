@@ -2861,8 +2861,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpamState
   minigame: {fileID: 1911764688}
-  safeZone: {fileID: 587277693}
-  pointerTransform: {fileID: 1452900193}
 --- !u!114 &1523573157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2879,8 +2877,6 @@ MonoBehaviour:
   pointerTransform: {fileID: 704627634}
   pointA: {fileID: 81308859}
   pointB: {fileID: 1327894571}
-  pointerMaxSpeed: 2
-  speedChangeRate: 0.2
   safeZone: {fileID: 1693178073}
   greatZone: {fileID: 1049285259}
   perfectZone: {fileID: 917667775}
@@ -2896,20 +2892,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0b52e2dc986ec41a02ea2a47319f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalState
-  topPeople: 5
+  topPeople: 1
   bottomPeople: 5
-  maxPeople: 10
+  maxPeople: 6
   maxStamina: 100
   startingStamina: 50
-  startingDrain: 0.01
-  currentStaminaDrain: 0
-  staminaDrainRate: 0.002
-  lastStand: 1
-  modeLastStand: 0
-  lastStandMode: 0
-  spamStaminaGainAmount: 2
+  staminaDrain: 0
+  staminaDrainMult: 0.1
+  staminaDrainChangeRate: 0.002
   skillCheckSpeed: 1
   skillCheckBaseSpeed: 1
+  skillCheckMaxSpeed: 2
+  skillCheckSpeedChangeRate: 0.2
+  lastStand: 0
+  spamStaminaGainAmount: 2
+  lastStandStaminaGainAmount: 4
   isInGame: 0
 --- !u!1 &1642766729
 GameObject:

@@ -8,9 +8,6 @@ public class SkillCheckState : GameState
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
 
-    [SerializeField] private float pointerMaxSpeed;
-    [SerializeField] private float speedChangeRate;
-
     [SerializeField] private RectTransform safeZone;
     [SerializeField] private RectTransform greatZone;
     [SerializeField] private RectTransform perfectZone;
@@ -31,32 +28,22 @@ public class SkillCheckState : GameState
             CheckSuccess();
         }
 
-        if (manager.GS.stamina.currentStamina <= 15 && manager.GS.topPeople == 1 && manager.GS.lastStand == true)
+        if (manager.GS.stamina.currentStamina >= 85)
         {
             manager.TransitionToState(EGameState.Spam);
-            manager.GS.lastStand = false;
-            if (manager.GS.modeLastStand == true)
-            {
-                manager.GS.lastStandMode = true;
-            }
-
-            manager.GS.spamStaminaGainAmount += 2;
         }
 
-        if (manager.GS.stamina.currentStamina >= 85 || manager.GS.lastStandMode == true)
+        if (manager.GS.stamina.currentStamina <= 15 && manager.GS.topPeople == 1 && manager.GS.lastStand == LastStand.Enabled)
         {
+            manager.GS.lastStand = LastStand.Activated;
             manager.TransitionToState(EGameState.Spam);
-            if (manager.GS.stamina.currentStamina >= 30 && manager.GS.lastStandMode == true)
-            {
-                manager.GS.lastStandMode = false;
-                manager.GS.spamStaminaGainAmount -= 2;
-            }
         }
     }
 
     public void SpeedUp()
     {
-        GlobalState.Instance.skillCheckSpeed = Mathf.Clamp(GlobalState.Instance.skillCheckSpeed + speedChangeRate, 0f, pointerMaxSpeed);
+        var gs = GlobalState.Instance;
+        gs.skillCheckSpeed = Mathf.Clamp(gs.skillCheckSpeed + gs.skillCheckSpeedChangeRate, 0f, gs.skillCheckMaxSpeed);
     }
 
     void CheckSuccess()

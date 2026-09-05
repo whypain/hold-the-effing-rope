@@ -56,12 +56,12 @@ public class GameStateManager : MonoBehaviour
 
     void Update()
     {
-        float currStamina = GS.stamina.currentStamina;
-
-        GS.isInGame = !(currentState is HomeState || currentState is GameOverState);
-
         currentState?.Tick(Time.deltaTime, this);
 
+        GS.isInGame = !(currentState is HomeState || currentState is GameOverState);
+        if (!GS.isInGame) return;
+
+        float currStamina = GS.stamina.currentStamina;
         if (currStamina >= 100 || currStamina <= 0)
         {
             ProcessResult();
@@ -81,9 +81,9 @@ public class GameStateManager : MonoBehaviour
             GS.stamina.Set(50);
             GS.topPeople += 1;
             GS.bottomPeople -= 1;
-            if (GS.currentStaminaDrain > 0)
+            if (GS.staminaDrain > 0)
             {
-                GS.currentStaminaDrain -= GS.staminaDrainRate;
+                GS.staminaDrain -= GS.staminaDrainChangeRate;
                 skillCheckState.SpeedUp();
             }
         }
@@ -93,7 +93,7 @@ public class GameStateManager : MonoBehaviour
             GS.topPeople -= 1;
             GS.stamina.Set(50);
 
-            GS.currentStaminaDrain += GS.staminaDrainRate;
+            GS.staminaDrain += GS.staminaDrainChangeRate;
             skillCheckState.SpeedUp();
         }
     }
