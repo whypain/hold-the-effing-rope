@@ -282,14 +282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StaminaBarUI
   bar: {fileID: 27824577}
-  maxStamina: 100
-  currentStamina: 50
-  staminaDrainRate: 0.002
-  currentStaminaDrain: 0
-  peopleControllers: {fileID: 404576663}
-  pointerController: {fileID: 704627635}
   volume: {fileID: 597045904}
   vignette: {fileID: 0}
+  vignetteMaxIntensity: 0.6
 --- !u!114 &27824577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -983,54 +978,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398818304}
   m_CullTransparentMesh: 1
---- !u!1 &404576661
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 404576662}
-  - component: {fileID: 404576663}
-  m_Layer: 0
-  m_Name: peopleControllers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &404576662
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404576661}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &404576663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404576661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70308f616e7291a48a42c258fec6f6db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PeopleControllers
-  topPeople: 5
-  bottomPeople: 5
-  maxPeople: 10
-  remainingText: {fileID: 2015642621}
 --- !u!1001 &413121686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1421,7 +1368,6 @@ MonoBehaviour:
   top: {fileID: 1006193533}
   bottom: {fileID: 607569331}
   target: {fileID: 1726042125}
-  staminaBar: {fileID: 27824576}
 --- !u!1 &535186454
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,7 +2254,6 @@ GameObject:
   - component: {fileID: 704627634}
   - component: {fileID: 704627637}
   - component: {fileID: 704627636}
-  - component: {fileID: 704627635}
   m_Layer: 5
   m_Name: pointer
   m_TagString: Untagged
@@ -2335,28 +2280,6 @@ RectTransform:
   m_AnchoredPosition: {x: -302.43, y: 0}
   m_SizeDelta: {x: 30, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &704627635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704627633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c674bb229ac0e64492594d0ef7c26c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PointerController
-  pointA: {fileID: 81308859}
-  pointB: {fileID: 1327894571}
-  safeZone: {fileID: 1693178073}
-  GreatZone: {fileID: 1049285259}
-  PerfectZone: {fileID: 917667775}
-  moveSpeed: 1
-  baseSpeed: 0
-  speedChangeRate: 0.25
-  maxSpeed: 2
-  staminaBarUI: {fileID: 27824576}
 --- !u!114 &704627636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2840,9 +2763,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1523573152}
-  - component: {fileID: 1523573155}
   - component: {fileID: 1523573154}
+  - component: {fileID: 1523573155}
+  - component: {fileID: 1523573157}
+  - component: {fileID: 1523573156}
   - component: {fileID: 1523573153}
+  - component: {fileID: 1523573158}
   m_Layer: 5
   m_Name: Minigames
   m_TagString: Untagged
@@ -2881,15 +2807,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523573151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0de798dea31c8c4fb5a9da62492b0ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 15e1f01538dd6cf43b78fd30ddf0b69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Replayable
-  Replaybar: {fileID: 583816229}
-  peopleControllers: {fileID: 404576663}
-  staminaBarUI: {fileID: 27824576}
-  minigamesControllers: {fileID: 1523573154}
-  isWinner: {fileID: 1523573155}
-  requiredHoldTime: 4
+  win: {fileID: 947737167}
+  lose: {fileID: 2111415814}
+  replay: {fileID: 583816225}
+  remaining: {fileID: 2015642619}
+  replayBar: {fileID: 583816229}
+  currentbar: 0
+  holdToReplaySeconds: 2
 --- !u!114 &1523573154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2899,17 +2826,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523573151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e70cc5d723c85489f233d7184879c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cb7590b8a6de434c8baa7a96bf05016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigamesControllers
-  miniG1: {fileID: 464724783}
-  miniG2: {fileID: 1911764688}
-  LastStand: 1
-  ModeLastStand: 0
-  spamSkillCheck: {fileID: 1911764690}
-  staminaBarUI: {fileID: 27824576}
-  peopleControllers: {fileID: 404576663}
-  isWinner: {fileID: 1523573155}
+  homeState: {fileID: 1523573155}
+  skillCheckState: {fileID: 1523573157}
+  spamState: {fileID: 1523573156}
+  gameOverState: {fileID: 1523573153}
 --- !u!114 &1523573155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2919,17 +2842,75 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523573151}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b7eeea15a5ab1842a1ab3d935339802, type: 3}
+  m_Script: {fileID: 11500000, guid: a2fd333c39d124044ad6d6599b34c72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IsWinner
-  win: {fileID: 947737167}
-  lose: {fileID: 2111415814}
-  replay: {fileID: 583816225}
   startScreen: {fileID: 593777424}
   remaining: {fileID: 2015642619}
-  peopleControllers: {fileID: 404576663}
-  GameOver: 0
-  gameStarted: 0
+  staminaBarUI: {fileID: 27824574}
+--- !u!114 &1523573156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523573151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab13754edcc860148b6cb845f28ed18e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpamState
+  minigame: {fileID: 1911764688}
+  safeZone: {fileID: 587277693}
+  pointerTransform: {fileID: 1452900193}
+--- !u!114 &1523573157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523573151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ccadad2bad3d049afd3b399bde6b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkillCheckState
+  minigame: {fileID: 464724783}
+  pointerTransform: {fileID: 704627634}
+  pointA: {fileID: 81308859}
+  pointB: {fileID: 1327894571}
+  pointerMaxSpeed: 2
+  speedChangeRate: 0.2
+  safeZone: {fileID: 1693178073}
+  greatZone: {fileID: 1049285259}
+  perfectZone: {fileID: 917667775}
+--- !u!114 &1523573158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523573151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0b52e2dc986ec41a02ea2a47319f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalState
+  topPeople: 5
+  bottomPeople: 5
+  maxPeople: 10
+  maxStamina: 100
+  startingStamina: 50
+  startingDrain: 0.01
+  currentStaminaDrain: 0
+  staminaDrainRate: 0.002
+  lastStand: 1
+  modeLastStand: 0
+  lastStandMode: 0
+  spamStaminaGainAmount: 2
+  skillCheckSpeed: 1
+  skillCheckBaseSpeed: 1
+  isInGame: 0
 --- !u!1 &1642766729
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,7 +3919,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1911764689}
-  - component: {fileID: 1911764690}
   m_Layer: 5
   m_Name: SpamSkillCheck
   m_TagString: Untagged
@@ -3967,22 +3947,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 800, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1911764690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1911764688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2789cd9c814cbd43b7824356e8010a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpamSkillCheck
-  safeZone: {fileID: 587277693}
-  pointerTransform: {fileID: 1452900193}
-  staminaBarUI: {fileID: 27824576}
-  staminaGainAmount: 1
 --- !u!1 &1985261037
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,6 +4254,7 @@ GameObject:
   - component: {fileID: 2015642620}
   - component: {fileID: 2015642622}
   - component: {fileID: 2015642621}
+  - component: {fileID: 2015642623}
   m_Layer: 5
   m_Name: Remaining
   m_TagString: Untagged
@@ -4418,6 +4383,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015642619}
   m_CullTransparentMesh: 1
+--- !u!114 &2015642623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015642619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf6b3656b9279a4297ca1e69fbdb5e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Remaining
+  remainingText: {fileID: 2015642621}
 --- !u!1 &2025904923
 GameObject:
   m_ObjectHideFlags: 0
@@ -4668,7 +4646,6 @@ SceneRoots:
   - {fileID: 659727064}
   - {fileID: 231453620}
   - {fileID: 566212263}
-  - {fileID: 404576662}
   - {fileID: 1799087390}
   - {fileID: 25010541}
   - {fileID: 413121686}
