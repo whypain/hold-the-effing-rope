@@ -34,14 +34,7 @@ public class SkillCheckState : GameState
         randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
         randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
 
-        var gs = GlobalState.Instance;
-        if (gs == null) return;
-
-        float staminaDrain = gs.staminaDrain;
-        gs.staminaDrain = 0;
         isGracePeriod = true;
-        TransitionManager.Instance?.ZoomOut();
-        gs.staminaDrain = staminaDrain;
 
         graceAnimCts?.Cancel();
         graceAnimCts = new CancellationTokenSource();

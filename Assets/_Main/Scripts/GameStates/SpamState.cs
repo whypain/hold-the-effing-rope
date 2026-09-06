@@ -21,6 +21,7 @@ public class SpamState : GameState
     public override void Exit() 
     {
         minigame.SetActive(false);
+        TransitionManager.Instance?.ZoomOut();
     }
 
     public override void Tick(float deltaTime, GameStateManager manager)
