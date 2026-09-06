@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class HomeState : GameState
 {
     [SerializeField] private GameObject startScreen;
-    [SerializeField] private GameObject remaining;
     [SerializeField] private GameObject staminaBarUI;
 
     public override void Enter()
@@ -19,7 +18,6 @@ public class HomeState : GameState
     public override void Exit()
     {
         startScreen.SetActive(false); 
-        remaining.SetActive(true);
         staminaBarUI.SetActive(true);
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum EGameState
@@ -8,8 +9,12 @@ public enum EGameState
     GameOver
 }
 
+[DefaultExecutionOrder(-10)]
 public class GameStateManager : MonoBehaviour
 {
+    public static GameStateManager Instance { get; private set; }
+    public event Action OnPeopleCountChanged;
+
     [SerializeField] private HomeState homeState;
     [SerializeField] private SkillCheckState skillCheckState;
     [SerializeField] private SpamState spamState;
@@ -18,6 +23,18 @@ public class GameStateManager : MonoBehaviour
     private GameState currentState;
 
     public GlobalState GS => GlobalState.Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
@@ -86,6 +103,7 @@ public class GameStateManager : MonoBehaviour
                 GS.staminaDrain -= GS.staminaDrainChangeRate;
                 skillCheckState.SpeedUp();
             }
+            OnPeopleCountChanged?.Invoke();
         }
         if (currStamina <= 0)
         {
@@ -95,6 +113,7 @@ public class GameStateManager : MonoBehaviour
 
             GS.staminaDrain += GS.staminaDrainChangeRate;
             skillCheckState.SpeedUp();
+            OnPeopleCountChanged?.Invoke();
         }
     }
 }

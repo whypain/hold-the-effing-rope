@@ -8,7 +8,6 @@ public class GameOverState : GameState
     [SerializeField] private GameObject lose;
     [SerializeField] private GameObject replay;
 
-    [SerializeField] private GameObject remaining;
 
     [Header("Replay")]
     [SerializeField] private Slider replayBar;
@@ -23,7 +22,6 @@ public class GameOverState : GameState
         if (gs == null) return;
 
         replay.SetActive(true);
-        remaining.SetActive(false);
 
         if (gs.topPeople == gs.maxPeople)
         {
@@ -44,7 +42,6 @@ public class GameOverState : GameState
         win.SetActive(false);
         lose.SetActive(false);
         replay.SetActive(false);
-        remaining.SetActive(false);
     }
 
     public override void Tick(float deltaTime, GameStateManager manager)
