@@ -3298,8 +3298,9 @@ MonoBehaviour:
   maxPeople: 10
   maxStamina: 100
   startingStamina: 50
+  staminaDrain: 0
   staminaDrainMult: 0.02
-  staminaDrainChangeRate: 0.002
+  staminaDrainChangeRate: 0.5
   skillCheckSpeed: 1
   skillCheckBaseSpeed: 1
   skillCheckMaxSpeed: 2
