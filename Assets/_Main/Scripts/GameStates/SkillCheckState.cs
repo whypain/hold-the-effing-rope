@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using PrimeTween;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class SkillCheckState : GameState
 {
     [SerializeField] private GameObject minigame;
     [SerializeField] private Canvas canvas;
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Transform pointerTransform;
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
@@ -20,17 +22,53 @@ public class SkillCheckState : GameState
     private float randomYMin;
     private float randomYMax;
 
+    private bool isGracePeriod = true;
+    private float gracePeriodDuration = 1.5f;
+    private float gracePeriodTimer = 0f;
+
+    private CancellationTokenSource graceAnimCts;
+
     public override void Enter() 
     { 
         minigame.SetActive(true); 
         randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
         randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
+
+        var gs = GlobalState.Instance;
+        if (gs == null) return;
+
+        float staminaDrain = gs.staminaDrain;
+        gs.staminaDrain = 0;
+        isGracePeriod = true;
+        TransitionManager.Instance?.ZoomOut();
+        gs.staminaDrain = staminaDrain;
+
+        graceAnimCts?.Cancel();
+        graceAnimCts = new CancellationTokenSource();
+
+        Sequence.Create()
+            .Chain(Tween.Alpha(canvasGroup, 0f, 1f, 0.5f))
+            .Chain(Tween.Alpha(canvasGroup, 1f, 0f, 0.5f, Ease.InQuad))
+            .SetCancellationToken(graceAnimCts.Token)
+            .SetRemainingCycles(-1);
     }
 
     public override void Exit() { minigame.SetActive(false); }
 
     public override void Tick(float deltaTime, GameStateManager manager)
     {
+        if (isGracePeriod)
+        {
+            gracePeriodTimer += deltaTime;
+            if (gracePeriodTimer >= gracePeriodDuration)
+            {
+                isGracePeriod = false;
+                gracePeriodTimer = 0f;
+                graceAnimCts?.Cancel();
+                canvasGroup.alpha = 1f;
+            }
+        }
+
         UpdatePointerPosition(deltaTime, manager);
 
         // Check for input
@@ -39,7 +77,7 @@ public class SkillCheckState : GameState
             CheckSuccess();
         }
 
-        if (manager.GS.stamina.currentStamina >= 85)
+        if (manager.GS.stamina.currentStamina >= manager.GS.spamEnterThreshold)
         {
             manager.TransitionToState(EGameState.Spam);
         }
@@ -103,9 +141,16 @@ public class SkillCheckState : GameState
                 Debug.Log("Success!");
                 GlobalState.Instance.stamina.Refill(10f);
             }
+
+            if (isGracePeriod)
+            {
+                // exit grace period immediately after a successful skill check
+                gracePeriodTimer = gracePeriodDuration;
+            }
         }
         else
         {
+            if (isGracePeriod) return;
             Debug.Log("Fail!");
             GlobalState.Instance.stamina.Drain(10f);
         }

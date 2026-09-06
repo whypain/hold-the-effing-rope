@@ -33,6 +33,7 @@ public class GlobalState : MonoBehaviour
 
     [Header("Spam")]
     public LastStand lastStand;
+    public float spamEnterThreshold = 70f;
     public float spamStaminaGainAmount;
     public float lastStandStaminaGainAmount;
 
