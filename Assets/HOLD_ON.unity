@@ -2514,6 +2514,7 @@ GameObject:
   - component: {fileID: 767359179}
   - component: {fileID: 767359181}
   - component: {fileID: 767359180}
+  - component: {fileID: 767359182}
   m_Layer: 5
   m_Name: Spacebar
   m_TagString: Untagged
@@ -2560,7 +2561,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6986b8ade3ce7724cbf35c491b266dbc, type: 3}
+  m_Sprite: {fileID: -1489662172260840153, guid: 643822716c6a43947be3c3a7e2988c2f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2578,6 +2579,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767359178}
   m_CullTransparentMesh: 1
+--- !u!95 &767359182
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767359178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3830dc76167e824482fd0f59efc5840, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &917667774
 GameObject:
   m_ObjectHideFlags: 0
@@ -3270,14 +3293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0b52e2dc986ec41a02ea2a47319f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GlobalState
-  topPeople: 1
+  topPeople: 5
   bottomPeople: 5
-  maxPeople: 6
+  maxPeople: 10
   maxStamina: 100
   startingStamina: 50
-  staminaDrain: 0
-  staminaDrainMult: 0.1
-  staminaDrainChangeRate: 0.005
+  staminaDrainMult: 0.02
+  staminaDrainChangeRate: 0.002
   skillCheckSpeed: 1
   skillCheckBaseSpeed: 1
   skillCheckMaxSpeed: 2
@@ -3411,6 +3433,7 @@ GameObject:
   - component: {fileID: 1726042125}
   - component: {fileID: 1726042126}
   - component: {fileID: 1726042127}
+  - component: {fileID: 1726042128}
   m_Layer: 0
   m_Name: NPC_Body
   m_TagString: Untagged
@@ -3508,6 +3531,28 @@ MonoBehaviour:
   strength: {x: 0.05, y: 0.05, z: 0}
   frequency: 5
   _shakeOnStart: 1
+--- !u!95 &1726042128
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726042124}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb872dfa1c4ed45479db0447289ae526, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1738887057
 GameObject:
   m_ObjectHideFlags: 0
