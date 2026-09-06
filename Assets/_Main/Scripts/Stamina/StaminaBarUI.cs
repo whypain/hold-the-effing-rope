@@ -53,7 +53,7 @@ public class StaminaBarUI : MonoBehaviour
             currentStamina = 101;
         }
 
-        currentStamina -= gs.staminaDrain * gs.staminaDrainMult;
+        currentStamina -= gs.staminaDrain;
         bar.value = currentStamina / gs.maxStamina;
 
         vignette.intensity.Override(Mathf.Clamp01(vignetteMaxIntensity - bar.value));

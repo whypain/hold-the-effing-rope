@@ -1,26 +1,37 @@
+using System.Threading.Tasks;
+using PrimeTween;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SkillCheckState : GameState
 {
     [SerializeField] private GameObject minigame;
+    [SerializeField] private Canvas canvas;
     [SerializeField] private Transform pointerTransform;
     [SerializeField] private Transform pointA;
     [SerializeField] private Transform pointB;
+    [SerializeField] private float endMargin = 50f;
 
     [SerializeField] private RectTransform safeZone;
     [SerializeField] private RectTransform greatZone;
     [SerializeField] private RectTransform perfectZone;
 
-    public override void Enter() { minigame.SetActive(true); }
+    private Transform target;
+    private float randomYMin;
+    private float randomYMax;
+
+    public override void Enter() 
+    { 
+        minigame.SetActive(true); 
+        randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
+        randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
+    }
+
     public override void Exit() { minigame.SetActive(false); }
 
     public override void Tick(float deltaTime, GameStateManager manager)
     {
-        // Move the pointer towards the target position
-        pointerTransform.position = Vector3.Lerp(
-            pointA.position, pointB.position, Mathf.PingPong(Time.time * GlobalState.Instance.skillCheckSpeed, 1f)
-        );
+        UpdatePointerPosition(deltaTime, manager);
 
         // Check for input
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
@@ -46,14 +57,36 @@ public class SkillCheckState : GameState
         gs.skillCheckSpeed = Mathf.Clamp(gs.skillCheckSpeed + gs.skillCheckSpeedChangeRate, 0f, gs.skillCheckMaxSpeed);
     }
 
+    private void UpdatePointerPosition(float deltaTime, GameStateManager manager)
+    {
+        var gs = manager.GS;
+        float speed = gs.skillCheckSpeed;
+
+        if (target == null)
+        {
+            target = pointB;
+        }
+
+        // Change direction if the pointer reaches one of the points
+        if (Vector3.Distance(pointerTransform.position, pointA.position) < 1f)
+        {
+            target = pointB;
+        }
+        else if (Vector3.Distance(pointerTransform.position, pointB.position) < 1f)
+        {
+            target = pointA;
+        }
+
+        pointerTransform.position = Vector3.MoveTowards(pointerTransform.position, target.position, speed * deltaTime * canvas.scaleFactor);
+    }
+
     void CheckSuccess()
     {
         // Check if the pointer is within the safe zone
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
-            float randomY = Random.Range(pointA.position.y-50, pointB.position.y+50);
             Vector2 newPositionY = safeZone.transform.position;
-            newPositionY.y = randomY;
+            newPositionY.y = Random.Range(randomYMin, randomYMax);
             safeZone.transform.position = newPositionY;
             if (RectTransformUtility.RectangleContainsScreenPoint(perfectZone, pointerTransform.position, null))
             {

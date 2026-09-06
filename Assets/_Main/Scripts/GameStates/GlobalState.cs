@@ -28,7 +28,6 @@ public class GlobalState : MonoBehaviour
     [Header("Configs")]
     [Header("Skill Check")]
     public float skillCheckSpeed;
-    public float skillCheckBaseSpeed;
     public float skillCheckMaxSpeed;
     public float skillCheckSpeedChangeRate;
 
@@ -62,7 +61,7 @@ public class GlobalState : MonoBehaviour
     public void Initialize()
     {
         stamina = new StaminaController(maxStamina, startingStamina);
-        staminaDrain = topPeople;
+        staminaDrain = topPeople * staminaDrainMult;
 
         // Store the initial values for reset
         m_topPeople = topPeople;

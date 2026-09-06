@@ -3275,9 +3275,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SkillCheckState
   minigame: {fileID: 464724783}
+  canvas: {fileID: 1738887060}
   pointerTransform: {fileID: 704627634}
   pointA: {fileID: 81308859}
   pointB: {fileID: 1327894571}
+  endMargin: 125
   safeZone: {fileID: 1693178073}
   greatZone: {fileID: 1049285259}
   perfectZone: {fileID: 917667775}
@@ -3300,11 +3302,10 @@ MonoBehaviour:
   startingStamina: 50
   staminaDrain: 0
   staminaDrainMult: 0.02
-  staminaDrainChangeRate: 0.5
-  skillCheckSpeed: 1
-  skillCheckBaseSpeed: 1
-  skillCheckMaxSpeed: 2
-  skillCheckSpeedChangeRate: 0.2
+  staminaDrainChangeRate: 0.02
+  skillCheckSpeed: 600
+  skillCheckMaxSpeed: 1200
+  skillCheckSpeedChangeRate: 150
   lastStand: 0
   spamStaminaGainAmount: 2
   lastStandStaminaGainAmount: 4
