@@ -12,6 +12,8 @@ public class HomeState : GameState
     {
         startScreen.SetActive(true);
         staminaBarUI.SetActive(false);
+
+        AudioSystem.Instance?.Play(AudioType.BGM);
     }
 
     public override void Exit()
