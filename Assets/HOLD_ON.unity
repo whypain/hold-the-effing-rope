@@ -3849,7 +3849,7 @@ MonoBehaviour:
   greatZone: {fileID: 1049285259}
   perfectZone: {fileID: 917667775}
   cameraShakeDuration: 0.5
-  cameraShakeMagnitude: 10
+  cameraShakeMagnitude: 1
 --- !u!114 &1523573158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3961,6 +3961,9 @@ MonoBehaviour:
   mainCamera: {fileID: 659727063}
   zoomInSize: 3.5
   zoomDuration: 0.5
+  cameraBobbingMagnitude: 0.2
+  cameraBobbingFrequency: 0.5
+  cameraBobbingDuration: 5
 --- !u!1 &1693178072
 GameObject:
   m_ObjectHideFlags: 0

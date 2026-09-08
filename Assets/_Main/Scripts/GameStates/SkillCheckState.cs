@@ -118,11 +118,6 @@ public class SkillCheckState : GameState
         // Check if the pointer is within the safe zone
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
-            Vector2 newPositionY = safeZone.transform.position;
-            randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
-            randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
-            newPositionY.y = Random.Range(randomYMin, randomYMax);
-            safeZone.transform.position = newPositionY;
             if (RectTransformUtility.RectangleContainsScreenPoint(perfectZone, pointerTransform.position, null))
             {
                 Debug.Log("Perfect!");
@@ -142,6 +137,8 @@ public class SkillCheckState : GameState
                 AudioSystem.Instance?.Play(AudioType.SkillCheckGood);
             }
 
+            RandomizeSafeZone();
+
             if (isGracePeriod)
             {
                 // exit grace period immediately after a successful skill check
@@ -156,5 +153,14 @@ public class SkillCheckState : GameState
             AudioSystem.Instance?.Play(AudioType.SkillCheckMiss);
             CameraManager.Instance?.ShakeCamera(cameraShakeDuration, cameraShakeMagnitude);
         }
+    }
+
+    private void RandomizeSafeZone()
+    {
+        Vector2 newPositionY = safeZone.transform.position;
+        randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
+        randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
+        newPositionY.y = Random.Range(randomYMin, randomYMax);
+        safeZone.transform.position = newPositionY;
     }
 }
