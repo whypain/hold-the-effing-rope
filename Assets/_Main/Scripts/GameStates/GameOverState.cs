@@ -27,6 +27,7 @@ public class GameOverState : GameState
         if (gs == null) return;
 
         replay.SetActive(true);
+        AudioSystem.Instance?.StopRopeAmbient();
 
         if (gs.topPeople == gs.maxPeople)         OnWin();
         else if (gs.bottomPeople == gs.maxPeople) OnLose();

@@ -123,16 +123,19 @@ public class SkillCheckState : GameState
             {
                 Debug.Log("Perfect!");
                 GlobalState.Instance.stamina.Refill(30f);
+                AudioSystem.Instance?.Play(AudioType.SkillCheckPerfect);
             }
             else if (RectTransformUtility.RectangleContainsScreenPoint(greatZone, pointerTransform.position, null))
             {
                 Debug.Log("Great!");
                 GlobalState.Instance.stamina.Refill(20f);
+                AudioSystem.Instance?.Play(AudioType.SkillCheckGreat);
             }
             else
             {
                 Debug.Log("Success!");
                 GlobalState.Instance.stamina.Refill(10f);
+                AudioSystem.Instance?.Play(AudioType.SkillCheckGood);
             }
 
             if (isGracePeriod)
@@ -146,6 +149,7 @@ public class SkillCheckState : GameState
             if (isGracePeriod) return;
             Debug.Log("Fail!");
             GlobalState.Instance.stamina.Drain(10f);
+            AudioSystem.Instance?.Play(AudioType.SkillCheckMiss);
         }
     }
 }

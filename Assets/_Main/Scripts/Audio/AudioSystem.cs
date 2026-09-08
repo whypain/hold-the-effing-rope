@@ -6,7 +6,13 @@ public enum AudioType
 {
     Win,
     Lose,
-    BGM
+    BGM,
+    SkillCheckGood,
+    SkillCheckGreat,
+    SkillCheckPerfect,
+    SkillCheckMiss,
+    PersonSaved,
+    PersonFell
 }
 
 public class AudioSystem : MonoBehaviour
@@ -14,11 +20,25 @@ public class AudioSystem : MonoBehaviour
     public static AudioSystem Instance { get; private set; }
 
     [SerializeField] private float fadeDuration = 0.5f;
+
     [SerializeField] private AudioClip winClip;
     [SerializeField] private AudioClip loseClip;
     [SerializeField] private AudioClip bgm;
+    [SerializeField] private AudioClip ropeAmbientClip;
 
+    [Header("Skill Check SFX")]
+    [SerializeField] private AudioClip skillCheckGoodClip;
+    [SerializeField] private AudioClip skillCheckGreatClip;
+    [SerializeField] private AudioClip skillCheckPerfectClip;
+    [SerializeField] private AudioClip skillCheckMissClip;
+
+    [Header("Gameplay SFX")]
+    [SerializeField] private AudioClip personSaved;
+    [SerializeField] private AudioClip personFell;
+
+    [Header("Sources")]
     [SerializeField] private AudioSource source;
+    [SerializeField] private AudioSource ambientSource;
     [SerializeField] private AudioSource sfxSource;
 
     private TweenSettings<float> fadeIn;
@@ -60,7 +80,41 @@ public class AudioSystem : MonoBehaviour
             case AudioType.BGM:
                 PlayAudio(bgm);
                 break;
+            case AudioType.SkillCheckGood:
+                PlaySFX(skillCheckGoodClip);
+                break;
+            case AudioType.SkillCheckGreat:
+                PlaySFX(skillCheckGreatClip);
+                break;
+            case AudioType.SkillCheckPerfect:
+                PlaySFX(skillCheckPerfectClip);
+                break;
+            case AudioType.SkillCheckMiss:
+                PlaySFX(skillCheckMissClip);
+                break;
+            case AudioType.PersonSaved:
+                PlaySFX(personSaved);
+                break;
+            case AudioType.PersonFell:
+                PlaySFX(personFell);
+                break;
         }
+    }
+
+    public void PlayRopeAmbient()
+    {
+        if (ambientSource == null || ambientSource.isPlaying) return;
+
+        ambientSource.loop = true;
+        ambientSource.clip = ropeAmbientClip;
+        ambientSource.Play();
+    }
+
+    public void StopRopeAmbient()
+    {
+        if (ambientSource == null || !ambientSource.isPlaying) return;
+
+        ambientSource.Stop();
     }
 
     private void PlaySFX(AudioClip clip)

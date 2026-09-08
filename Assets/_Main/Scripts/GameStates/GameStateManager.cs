@@ -95,25 +95,38 @@ public class GameStateManager : MonoBehaviour
         float currStamina = GS.stamina.currentStamina;
         if (currStamina >= 100)
         {
-            GS.stamina.Set(50);
-            GS.topPeople += 1;
-            GS.bottomPeople -= 1;
-            if (GS.staminaDrain > 0)
-            {
-                GS.staminaDrain -= GS.staminaDrainChangeRate;
-                skillCheckState.SpeedUp();
-            }
-            OnPeopleCountChanged?.Invoke();
+            OnPersonSaved();
         }
         if (currStamina <= 0)
         {
-            GS.bottomPeople += 1;
-            GS.topPeople -= 1;
-            GS.stamina.Set(50);
-
-            GS.staminaDrain += GS.staminaDrainChangeRate;
-            skillCheckState.SpeedUp();
-            OnPeopleCountChanged?.Invoke();
+            OnPersonFell();
         }
+    }
+
+    private void OnPersonSaved()
+    {
+        GS.stamina.Set(50);
+        GS.topPeople += 1;
+        GS.bottomPeople -= 1;
+        if (GS.staminaDrain > 0)
+        {
+            GS.staminaDrain -= GS.staminaDrainChangeRate;
+            skillCheckState.SpeedUp();
+        }
+        OnPeopleCountChanged?.Invoke();
+        AudioSystem.Instance?.Play(AudioType.PersonSaved);
+    }
+
+    private void OnPersonFell()
+    {
+        GS.bottomPeople += 1;
+        GS.topPeople -= 1;
+        GS.stamina.Set(50);
+
+        GS.staminaDrain += GS.staminaDrainChangeRate;
+        skillCheckState.SpeedUp();
+
+        OnPeopleCountChanged?.Invoke();
+        AudioSystem.Instance?.Play(AudioType.PersonFell);
     }
 }

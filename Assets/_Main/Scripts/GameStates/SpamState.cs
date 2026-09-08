@@ -16,12 +16,16 @@ public class SpamState : GameState
         gs.staminaDrain = 0;
         await TransitionManager.Instance?.ZoomIn();
         gs.staminaDrain = staminaDrain;
+
+        AudioSystem.Instance?.PlayRopeAmbient();
     }
 
     public override void Exit() 
     {
         minigame.SetActive(false);
         TransitionManager.Instance?.ZoomOut();
+
+        AudioSystem.Instance?.StopRopeAmbient();
     }
 
     public override void Tick(float deltaTime, GameStateManager manager)
