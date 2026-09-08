@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameOverState : GameState
@@ -67,7 +66,7 @@ public class GameOverState : GameState
 
     public override void Tick(float deltaTime, GameStateManager manager)
     {
-        if (Keyboard.current.spaceKey.isPressed)
+        if (InputManager.Instance.PlayerAction.action.IsPressed())
         {
             Debug.Log("Space key is being held down.");
             holdTimer += deltaTime;

@@ -67,7 +67,7 @@ public class SkillCheckState : GameState
         UpdatePointerPosition(deltaTime, manager);
 
         // Check for input
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (InputManager.Instance.PlayerAction.action.WasPressedThisFrame())
         {
             CheckSuccess();
         }

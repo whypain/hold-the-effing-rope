@@ -38,7 +38,7 @@ public class HomeState : GameState
 
     public override void Tick(float deltaTime, GameStateManager manager)
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (InputManager.Instance.PlayerAction.action.WasPressedThisFrame())
         {
             manager.TransitionToState(EGameState.SkillCheck); 
             manager.GS.Initialize();

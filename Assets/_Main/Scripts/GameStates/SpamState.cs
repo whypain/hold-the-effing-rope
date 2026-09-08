@@ -30,7 +30,7 @@ public class SpamState : GameState
 
     public override void Tick(float deltaTime, GameStateManager manager)
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (InputManager.Instance.PlayerAction.action.WasPressedThisFrame())
         {
             Debug.Log("Spam");
             float refillAmount = GlobalState.Instance.lastStand == LastStand.Activated
