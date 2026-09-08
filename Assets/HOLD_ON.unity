@@ -3848,6 +3848,8 @@ MonoBehaviour:
   safeZone: {fileID: 1693178073}
   greatZone: {fileID: 1049285259}
   perfectZone: {fileID: 917667775}
+  cameraShakeDuration: 0.5
+  cameraShakeMagnitude: 10
 --- !u!114 &1523573158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3921,7 +3923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1651526984}
-  - component: {fileID: 1651526983}
+  - component: {fileID: 1651526985}
   m_Layer: 0
   m_Name: TransitionManager
   m_TagString: Untagged
@@ -3929,21 +3931,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1651526983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651526982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8f735cc1147e940ac119a489ff28e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TransitionManager
-  mainCamera: {fileID: 659727063}
-  zoomInSize: 3.5
-  zoomDuration: 0.5
 --- !u!4 &1651526984
 Transform:
   m_ObjectHideFlags: 0
@@ -3959,6 +3946,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1651526985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651526982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f2c3593735837489bdb39a249e4eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraManager
+  mainCamera: {fileID: 659727063}
+  zoomInSize: 3.5
+  zoomDuration: 0.5
 --- !u!1 &1693178072
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,10 @@ public class SkillCheckState : GameState
     [SerializeField] private RectTransform greatZone;
     [SerializeField] private RectTransform perfectZone;
 
+    [Header("Camera Shake Settings")]
+    [SerializeField] private float cameraShakeDuration = 0.5f;  
+    [SerializeField] private float cameraShakeMagnitude = 1f;
+
     private Transform target;
     private float randomYMin;
     private float randomYMax;
@@ -31,8 +35,6 @@ public class SkillCheckState : GameState
     public override void Enter() 
     { 
         minigame.SetActive(true); 
-        randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
-        randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
 
         isGracePeriod = true;
 
@@ -117,6 +119,8 @@ public class SkillCheckState : GameState
         if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, pointerTransform.position, null))
         {
             Vector2 newPositionY = safeZone.transform.position;
+            randomYMin = pointA.position.y - endMargin * canvas.scaleFactor;
+            randomYMax = pointB.position.y + endMargin * canvas.scaleFactor;
             newPositionY.y = Random.Range(randomYMin, randomYMax);
             safeZone.transform.position = newPositionY;
             if (RectTransformUtility.RectangleContainsScreenPoint(perfectZone, pointerTransform.position, null))
@@ -150,6 +154,7 @@ public class SkillCheckState : GameState
             Debug.Log("Fail!");
             GlobalState.Instance.stamina.Drain(10f);
             AudioSystem.Instance?.Play(AudioType.SkillCheckMiss);
+            CameraManager.Instance?.ShakeCamera(cameraShakeDuration, cameraShakeMagnitude);
         }
     }
 }

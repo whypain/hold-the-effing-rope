@@ -14,7 +14,7 @@ public class SpamState : GameState
 
         float staminaDrain = gs.staminaDrain;
         gs.staminaDrain = 0;
-        await TransitionManager.Instance?.ZoomIn();
+        await CameraManager.Instance?.ZoomIn();
         gs.staminaDrain = staminaDrain;
 
         AudioSystem.Instance?.PlayRopeAmbient();
@@ -23,7 +23,7 @@ public class SpamState : GameState
     public override void Exit() 
     {
         minigame.SetActive(false);
-        TransitionManager.Instance?.ZoomOut();
+        CameraManager.Instance?.ZoomOut();
 
         AudioSystem.Instance?.StopRopeAmbient();
     }
