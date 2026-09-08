@@ -10,7 +10,7 @@ public class GameOverState : GameState
 
 
     [Header("Replay")]
-    [SerializeField] private Slider replayBar;
+    [SerializeField] private Image replayBar;
     [SerializeField] private float currentbar;
     [SerializeField] private float holdToReplaySeconds = 4f;
 
@@ -71,7 +71,6 @@ public class GameOverState : GameState
         {
             Debug.Log("Space key is being held down.");
             holdTimer += deltaTime;
-            replayBar.value = holdTimer / holdToReplaySeconds;
             if (holdTimer >= holdToReplaySeconds)
             {
                 holdTimer = 0f;
@@ -83,7 +82,7 @@ public class GameOverState : GameState
         else
         {
             holdTimer = Mathf.Max(0, holdTimer - deltaTime);
-            replayBar.value = holdTimer / holdToReplaySeconds;
         }
+        replayBar.fillAmount = holdTimer / holdToReplaySeconds;
     }
 }
