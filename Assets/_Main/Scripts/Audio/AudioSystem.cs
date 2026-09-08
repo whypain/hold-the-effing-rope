@@ -15,26 +15,45 @@ public enum AudioType
     PersonFell
 }
 
+[System.Serializable]
+public struct AudioClipData
+{
+    [SerializeField] private AudioClip clip;
+    [SerializeField] private bool loop;
+    [SerializeField, Range(0f, 1f)] private float volume;
+
+    public AudioClip Clip => clip;
+    public bool Loop => loop;
+    public float Volume => volume;
+
+    public AudioClipData(AudioClip clip, bool loop = false, float volume = 1f)
+    {
+        this.clip = clip;
+        this.loop = loop;
+        this.volume = volume;
+    }
+}
+
 public class AudioSystem : MonoBehaviour
 {
     public static AudioSystem Instance { get; private set; }
 
     [SerializeField] private float fadeDuration = 0.5f;
 
-    [SerializeField] private AudioClip winClip;
-    [SerializeField] private AudioClip loseClip;
-    [SerializeField] private AudioClip bgm;
-    [SerializeField] private AudioClip ropeAmbientClip;
+    [SerializeField] private AudioClipData winClip;
+    [SerializeField] private AudioClipData loseClip;
+    [SerializeField] private AudioClipData bgm;
+    [SerializeField] private AudioClipData ropeAmbientClip;
 
     [Header("Skill Check SFX")]
-    [SerializeField] private AudioClip skillCheckGoodClip;
-    [SerializeField] private AudioClip skillCheckGreatClip;
-    [SerializeField] private AudioClip skillCheckPerfectClip;
-    [SerializeField] private AudioClip skillCheckMissClip;
+    [SerializeField] private AudioClipData skillCheckGoodClip;
+    [SerializeField] private AudioClipData skillCheckGreatClip;
+    [SerializeField] private AudioClipData skillCheckPerfectClip;
+    [SerializeField] private AudioClipData skillCheckMissClip;
 
     [Header("Gameplay SFX")]
-    [SerializeField] private AudioClip personSaved;
-    [SerializeField] private AudioClip personFell;
+    [SerializeField] private AudioClipData personSaved;
+    [SerializeField] private AudioClipData personFell;
 
     [Header("Sources")]
     [SerializeField] private AudioSource source;
@@ -72,10 +91,10 @@ public class AudioSystem : MonoBehaviour
         switch (type)
         {
             case AudioType.Win:
-                PlayAudio(winClip, loop: false);
+                PlayAudio(winClip);
                 break;
             case AudioType.Lose:
-                PlayAudio(loseClip, loop: false);
+                PlayAudio(loseClip);
                 break;
             case AudioType.BGM:
                 PlayAudio(bgm);
@@ -106,7 +125,8 @@ public class AudioSystem : MonoBehaviour
         if (ambientSource == null || ambientSource.isPlaying) return;
 
         ambientSource.loop = true;
-        ambientSource.clip = ropeAmbientClip;
+        ambientSource.clip = ropeAmbientClip.Clip;
+        ambientSource.volume = ropeAmbientClip.Volume;
         ambientSource.Play();
     }
 
@@ -117,48 +137,49 @@ public class AudioSystem : MonoBehaviour
         ambientSource.Stop();
     }
 
-    private void PlaySFX(AudioClip clip)
+    private void PlaySFX(AudioClipData clipData)
     {
-        if (sfxSource == null || clip == null) return;
+        if (sfxSource == null || clipData.Clip == null) return;
 
-        sfxSource.PlayOneShot(clip);
+        sfxSource.pitch = Random.Range(0.95f, 1.05f); // Slightly randomize pitch for variety
+        sfxSource.PlayOneShot(clipData.Clip, clipData.Volume);
     }
 
-    private async void PlayAudio(AudioClip clip, bool loop = true)
+    private async void PlayAudio(AudioClipData clipData)
     {
-        if (source == null || clip == null) return;
+        if (source == null || clipData.Clip == null) return;
 
-        source.loop = loop;
-        await FadeChange(clip);
+        source.loop = clipData.Loop;
+        await FadeChange(clipData);
     }
 
-    /// <summary>
-    /// Interrupts the current bgm temporarily to play a new clip
-    /// then returns to the previous bgm after the new clip finishes playing.
-    /// </summary>
-    /// <param name="clip"></param>
-    private async void InterruptBGM(AudioClip clip)
+    // /// <summary>
+    // /// Interrupts the current bgm temporarily to play a new clip
+    // /// then returns to the previous bgm after the new clip finishes playing.
+    // /// </summary>
+    // /// <param name="clipData"></param>
+    // private async void InterruptBGM(AudioClipData clipData)
+    // {
+    //     if (source == null || clipData.Clip == null) return;
+
+    //     source.loop = false;
+    //     await FadeChange(clipData);
+
+    //     // wait for the clip to finish playing
+    //     while (source.isPlaying)
+    //     {
+    //         await Task.Yield();
+    //     }
+
+    //     source.loop = true;
+    //     PlayAudio(bgm);
+    // }
+
+    private async Task FadeChange(AudioClipData newClipData)
     {
-        if (source == null || clip == null) return;
+        if (newClipData.Clip == source.clip) return;
 
-        source.loop = false;
-        await FadeChange(clip);
-
-        // wait for the clip to finish playing
-        while (source.isPlaying)
-        {
-            await Task.Yield();
-        }
-
-        source.loop = true;
-        PlayAudio(bgm);
-    }
-
-    private async Task FadeChange(AudioClip newClip)
-    {
-        if (newClip == source.clip) return;
-
-        fadeIn.endValue = source.volume;
+        fadeIn.endValue = newClipData.Volume;
 
         if (source.isPlaying)
         {
@@ -168,7 +189,7 @@ public class AudioSystem : MonoBehaviour
             source.Stop();
         }
 
-        source.clip = newClip;
+        source.clip = newClipData.Clip;
         source.Play();
         await Tween.AudioVolume(source, fadeIn);
     }
