@@ -14,10 +14,10 @@ public class SpamState : GameState
 
         float staminaDrain = gs.staminaDrain;
         gs.staminaDrain = 0;
-        await CameraManager.Instance?.ZoomIn();
-        gs.staminaDrain = staminaDrain;
 
         AudioSystem.Instance?.PlayRopeAmbient();
+        await CameraManager.Instance?.ZoomIn();
+        gs.staminaDrain = staminaDrain;
     }
 
     public override void Exit() 
